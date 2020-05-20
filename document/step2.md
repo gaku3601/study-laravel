@@ -121,3 +121,89 @@ docker-compose exec php php artisan route:list
 +--------+-----------+-------------------------+------------------+------------------------------------------------+--------------+
 ```
 
+### viewの作成
+resources/viewsにファイルを[ファイル名].blade.phpのように作成する。
+```
+[resources/views/examples.blade.php]
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Bladeによるこんにちは</title>
+</head>
+	<body>
+		<h1>こんにちは! Blade!</h1>
+	</body>
+</html>
+```
+
+controllerのindexで以下のように記載
+```
+・・・
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('examples');
+    }
+・・・
+```
+これで /examples にブラウザ等でアクセスすると指定のviewが表示される
+
+### modelの作成
+以下コマンドでコマンドを作成可能
+```
+[-mをつけることでmigrationも作成してくれる]
+docker-compose exec php php artisan make:model example -m
+```
+app配下にmodelが生成される。tableと紐付けるため、以下のように修正
+```
+class example extends Model
+{
+    // 対応するテーブルを記載
+    protected $table = 'examples';
+    // 主キーの指定
+    protected $primaryKey = 'id';
+    // created_atとupdated_atの自動更新をONにする
+    public $timestamps = true;
+}
+```
+
+#### migrationの作成
+database/migrations配下にmigrationが生成されるので、以下のように修正
+```
+class CreateExamplesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('examples', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('examples');
+    }
+}
+```
+修正が終わったら、以下のコマンドを実行することで、tableに反映可能
+```
+docker-compose exec php php artisan migrate
+```
+
