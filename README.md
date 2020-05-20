@@ -8,6 +8,6 @@ docker-compose up -d
 docker-compose exec php composer update
 ```
 
-http://localhostにアクセスしLaravelの初期画面が出れば成功。  
+http://localhost にアクセスしLaravelの初期画面が出れば成功。  
 [参考文献]  
 https://qiita.com/A-Kira/items/1c55ef689c0f91420e81  
