@@ -207,3 +207,17 @@ class CreateExamplesTable extends Migration
 docker-compose exec php php artisan migrate
 ```
 
+databaseにアクセスして定義を確認するには以下を実行
+```
+docker-compose exec db mysql -u docker -p database -pdocker
+SHOW TABLES;
++--------------------+
+| Tables_in_database |
++--------------------+
+| examples           |
+| failed_jobs        |
+| migrations         |
+| users              |
++--------------------+
+4 rows in set (0.01 sec)
+```
