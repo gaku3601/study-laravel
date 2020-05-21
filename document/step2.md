@@ -221,3 +221,14 @@ SHOW TABLES;
 +--------------------+
 4 rows in set (0.01 sec)
 ```
+
+#### debug方法
+以下の記述を出力したい場所に記述
+```
+logger(print_r($object, true));
+```
+
+storage/logs/laravel.logに出力されるので、以下コマンドで監視できる。
+```
+docker-compose exec php tail -f storage/logs/laravel.log
+```
