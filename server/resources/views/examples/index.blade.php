@@ -40,7 +40,7 @@
             {
                 'test': document.getElementById('name').value
             },
-            function(e) { console.log(e); },
+            function(e) { document.getElementById('name').value = ''; },
             function(e) { console.log(e); }
         )">click</button>
 	</body>
