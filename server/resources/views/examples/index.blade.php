@@ -14,7 +14,7 @@
         </div>
         <button onClick="
         http(
-            Method.POST,
+            METHOD.POST,
             'http://localhost/examples',
             {
                 'test': document.getElementById('name').value
