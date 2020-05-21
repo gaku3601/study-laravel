@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class example extends Model
+class Example extends Model
 {
     // 対応するテーブルを記載
     protected $table = 'examples';

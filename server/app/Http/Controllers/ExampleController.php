@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Example;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -14,7 +15,8 @@ class ExampleController extends Controller
      */
     public function index()
     {
-        return view('examples.index');
+        $data = Example::all();
+        return view('examples.index', ['data' => $data]);
     }
 
     /**
@@ -35,9 +37,12 @@ class ExampleController extends Controller
     public function store(Request $request)
     {
         $object = $request->input('test');
+        Example::insert([
+            'name' => $object
+        ]);
         logger(print_r($object, true));
         return response()->json([
-            'name' => 'eigyou'
+            'name' => $object
         ]);
     }
 

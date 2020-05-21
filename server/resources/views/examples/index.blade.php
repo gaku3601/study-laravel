@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Bladeによるこんにちは</title>
-    <script src="{{ asset('/js/ajax.js') }}"></script>
+    <script src="{{asset('/js/ajax.js')}}"></script>
 </head>
 	<body>
 		<h1>こんにちは! Blade!</h1>
@@ -19,8 +19,14 @@
             {
                 'test': document.getElementById('name').value
             },
-            function(e) { document.getElementById('name').value = ''; },
+            function(e) { location.reload(); },
             function(e) { console.log(e); }
-        )">click</button>
+        )">保存</button>
+        <p>DBに追加した内容</p>
+        <div>
+        @foreach ($data as $val)
+            <div>{{ $val->name }}</div>
+        @endforeach
+        </div>
 	</body>
 </html>
