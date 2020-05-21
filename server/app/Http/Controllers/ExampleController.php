@@ -36,6 +36,7 @@ class ExampleController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO トランザクションの書き方
         $object = $request->input('test');
         Example::insert([
             'name' => $object
