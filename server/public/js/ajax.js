@@ -93,16 +93,16 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-window.Method = {
+window.METHOD = {
   POST: "post",
   GET: "get",
   DELETE: "delete",
   PATCH: "patch"
 };
-var ajax = new XMLHttpRequest();
-ajax.responseType = 'json';
 
 window.http = function (method, uri, json, success, error) {
+  var ajax = new XMLHttpRequest();
+  ajax.responseType = 'json';
   ajax.open(method, uri);
   ajax.setRequestHeader("Content-Type", "application/json");
   ajax.setRequestHeader("X-CSRF-TOKEN", document.getElementsByName('csrf-token')[0].content);
