@@ -8,23 +8,27 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
+     * ここでコマンドを登録する
      *
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ExampleScheduler::Class,
     ];
 
     /**
-     * Define the application's command schedule.
+     * ここでSchedulerの登録を行う
+     * schedule方法は以下を参考
+     * https://readouble.com/laravel/5.7/ja/scheduling.html
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // 1分単位で実行
+        $schedule->command('examplescheduler:info')
+            ->cron('*/1 * * * *');
     }
 
     /**
