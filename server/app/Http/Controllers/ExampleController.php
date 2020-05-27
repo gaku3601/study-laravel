@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Example;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ExampleController extends Controller
 {
@@ -25,6 +24,7 @@ class ExampleController extends Controller
         // QueryBuilder(DB Facadesを利用し操作)
         // $data = DB::selectOne("SELECT * FROM examples WHERE id = ? ORDER BY id DESC",[2]); // 単票取得
         // $data = DB::select("SELECT * FROM examples WHERE id = ? ORDER BY id DESC",[2]); // Collection取得
+        abort(404, '無効なURLです。');
         $data = DB::select("SELECT * FROM examples ORDER BY id DESC"); // Collection取得
         return view('examples.index', ['data' => $data]);
     }
