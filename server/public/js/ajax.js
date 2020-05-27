@@ -97,7 +97,8 @@ window.METHOD = {
   POST: "post",
   GET: "get",
   DELETE: "delete",
-  PATCH: "patch"
+  PATCH: "patch",
+  PUT: "put"
 };
 
 window.http = function (method, uri, json, success, error) {
