@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -29,12 +29,12 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param  \Exception  $exception
      * @return void
      *
      * @throws \Exception
      */
-    public function report(Throwable $exception)
+    public function report(Exception $exception)
     {
         parent::report($exception);
     }
@@ -43,25 +43,13 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
+     * @param  \Exception  $exception
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws \Throwable
+     * @throws \Exception
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Exception $exception)
     {
-        if($this->isHttpException($exception)) {
-            // 403
-            if($exception->getStatusCode() == 403) {
-                return response()->view('errors.403', ['message' => $exception->getMessage()]);
-            }
-            // 404
-            if($exception->getStatusCode() == 404) {
-                return response()->view('errors.404', ['message' => $exception->getMessage()]);
-            }
-            // 500
-            return response()->view('errors.500', ['message' => $exception->getMessage()]);
-        }
-        return parent::render($request, $$exception);
+        return parent::render($request, $exception);
     }
 }
