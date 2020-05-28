@@ -18,10 +18,12 @@
             'http://localhost/examples/{{$id}}',
             {
                 'test': document.getElementById('name').value,
+                'version': {{$data->version}},
                 '_method': 'PATCH'
             },
             function(e) { console.log(e);location.href = '{{ route("examples.show", ["example" => $id]) }}'; },
-function(e) { console.log(e); }
-)">保存</button>
+            function(e) { alert(e) }
+            )">保存</button>
+<div>{{$data->version}}</div>
 </body>
 </html>

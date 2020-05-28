@@ -47,7 +47,7 @@ class ExampleController extends Controller
     public function store(Request $request)
     {
         $object = $request->input('test');
-        Example::insert([
+        Example::create([
             'name' => $object
         ]);
         logger(print_r($object, true));
@@ -92,15 +92,23 @@ class ExampleController extends Controller
      */
     public function update($id, Request $request)
     {
-        $object = $request->input('test');
-        logger(print_r($object, true));
-        logger(print_r($id, true));
-        Example::where('id', $id)->update([
-            'name' => $object
-        ]);
-        return response()->json([
-            'name' => $object
-        ]);
+        try{
+            $object = $request->input('test');
+            $version = $request->input('version');
+            $ex = Example::find($id);
+            $ex->name = $object;
+            $ex->version = $version;
+            $ex->save();
+
+            return response()->json([
+                'name' => $object
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => 500,
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
