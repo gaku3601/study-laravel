@@ -5,7 +5,10 @@
 docker-compose up -d
 
 [Laravel依存ライブラリのinstall]
-docker-compose exec php composer update
+docker-compose exec web composer update
+docker-compose exec web a2enmod rewrite
+docker-compose exec web npm install
+docker-compose exec web npm run dev
 ```
 
 http://localhost にアクセスしLaravelの初期画面が出れば成功。  
