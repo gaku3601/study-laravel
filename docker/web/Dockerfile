@@ -1,7 +1,6 @@
 FROM php:7.3-apache
 
 COPY php.ini /usr/local/etc/php/
-COPY *.conf /etc/apache2/sites-enabled/
 
 RUN apt-get update \
   && apt-get install -y libzip-dev zlib1g-dev mariadb-client \
@@ -29,5 +28,8 @@ COPY crontab /etc/cron.d/laravel-cron
 RUN chmod 0644 /etc/cron.d/laravel-cron
 RUN crontab /etc/cron.d/laravel-cron
 RUN touch /var/log/cron.log
+
+# confの配置
+COPY *.conf /etc/apache2/sites-enabled/
 
 CMD service cron start && apache2-foreground && docker-php-entrypoint
